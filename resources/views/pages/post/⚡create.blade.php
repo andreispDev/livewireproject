@@ -58,6 +58,9 @@ new class extends Component {
                     Save Post
                 </flux:button>
             </div>
+
         </form>
     </flux:card>
 </div>
+
+@layout('layouts.app')
