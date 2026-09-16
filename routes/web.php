@@ -15,3 +15,4 @@ Route::middleware('guest')->group(function () {
 //         ->name('dashboard');
 // });
 Route::livewire('/dashboard', 'dashboard.index');
+Route::livewire('/dashboard/soimap', 'pages::dashboard.soimap');

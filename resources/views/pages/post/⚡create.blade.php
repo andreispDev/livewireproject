@@ -1,8 +1,9 @@
 <?php
 
 use Livewire\Component;
+use Livewire\Attributes\Layout;
 
-new class extends Component {
+new #[Layout('layouts.app')] class extends Component {
     public string $title = '';
 
     public string $content = '';
@@ -62,5 +63,3 @@ new class extends Component {
         </form>
     </flux:card>
 </div>
-
-@layout('layouts.app')

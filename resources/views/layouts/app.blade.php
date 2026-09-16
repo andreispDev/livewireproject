@@ -20,28 +20,105 @@
                 href="#"
                 logo="https://fluxui.dev/img/demo/logo.png"
                 logo:dark="https://fluxui.dev/img/demo/dark-mode-logo.png"
-                name="Acme Inc."
+                name="IP Threat Monitoring"
             />
 
             <flux:sidebar.collapse class="in-data-flux-sidebar-on-desktop:not-in-data-flux-sidebar-collapsed-desktop:-mr-2" />
         </flux:sidebar.header>
 
+        {{-- Sidebar --}}
         <flux:sidebar.nav>
-            <flux:sidebar.item icon="home" href="#" current>Home</flux:sidebar.item>
-            <flux:sidebar.item icon="inbox" badge="12" href="#">Inbox</flux:sidebar.item>
-            <flux:sidebar.item icon="document-text" href="#">Documents</flux:sidebar.item>
-            <flux:sidebar.item icon="calendar" href="#">Calendar</flux:sidebar.item>
+            <flux:sidebar.item icon="home" href="{{ url('/dashboard') }}">Dashboard</flux:sidebar.item>
 
+            {{-- Maps --}}
             <flux:sidebar.group
                 expandable
                 expanded="false"
-                icon="star"
-                heading="Favorites"
+                icon="map"
+                heading="Maps"
                 class="grid"
             >
-                <flux:sidebar.item href="#">Marketing site</flux:sidebar.item>
-                <flux:sidebar.item href="#">Android app</flux:sidebar.item>
-                <flux:sidebar.item href="#">Brand guidelines</flux:sidebar.item>
+                <flux:sidebar.item href="#">Informant Map</flux:sidebar.item>
+                <flux:sidebar.item href="{{ url('/dashboard/soimap') }}">SOI Map</flux:sidebar.item>
+            </flux:sidebar.group>
+
+            {{-- ITA --}}
+             <flux:sidebar.group
+                expandable
+                expanded="false"
+                icon="table-cells"
+                heading="ITA"
+                class="grid"
+            >
+                <flux:sidebar.item href="#">Cell Mapping</flux:sidebar.item>
+                <flux:sidebar.item href="#">Liaising</flux:sidebar.item>
+                <flux:sidebar.item href="#">After Operation Report</flux:sidebar.item>
+            </flux:sidebar.group>
+
+            {{-- Records --}}
+             <flux:sidebar.group
+                expandable
+                expanded="false"
+                icon="list-bullet"
+                heading="Records"
+                class="grid"
+            >
+                <flux:sidebar.item href="#">Source of Information</flux:sidebar.item>
+                <flux:sidebar.item href="#">Informant</flux:sidebar.item>
+                <flux:sidebar.item href="#">Intelligence Specialist</flux:sidebar.item>
+                <flux:sidebar.item href="#">COP/OIP</flux:sidebar.item>
+            </flux:sidebar.group>
+
+            {{-- Message --}}
+            <flux:sidebar.group
+                expandable
+                expanded="false"
+                icon="inbox-arrow-down"
+                heading="Message"
+                class="grid"
+            >
+                <flux:sidebar.item href="#">Inbox</flux:sidebar.item>
+                <flux:sidebar.item href="#">Sent</flux:sidebar.item>
+            </flux:sidebar.group>
+
+            {{-- Encoding --}}
+            <flux:sidebar.group
+                expandable~
+                expanded="false"
+                icon="document-text"
+                heading="Encoding"
+                class="grid"
+            >
+                <flux:sidebar.item href="#">Informants</flux:sidebar.item>
+                <flux:sidebar.item href="#">FFB</flux:sidebar.item>
+                <flux:sidebar.item href="#">After Operation Report</flux:sidebar.item>
+            </flux:sidebar.group>
+
+            {{-- Periodic Status Report --}}
+            <flux:sidebar.group
+                expandable
+                expanded="false"
+                icon="chart-bar-square"
+                heading="Periodic Status Report"
+                class="grid"
+            >
+                <flux:sidebar.item href="#">Threat Groups</flux:sidebar.item>
+                <flux:sidebar.item href="#">Sub Threat Groups</flux:sidebar.item>
+                <flux:sidebar.item href="#">Sub Region</flux:sidebar.item>
+                <flux:sidebar.item href="#">Sub Threat Units</flux:sidebar.item>
+                <flux:sidebar.item href="#">Sub-Activities</flux:sidebar.item>
+                <flux:sidebar.item href="#">Boat</flux:sidebar.item>
+            </flux:sidebar.group>
+
+            {{-- Security --}}
+            <flux:sidebar.group
+                expandable
+                expanded="false"
+                icon="lock-closed"
+                heading="Security"
+                class="grid"
+            >
+                <flux:sidebar.item href="#">Change Password</flux:sidebar.item>
             </flux:sidebar.group>
 
         </flux:sidebar.nav>
@@ -101,11 +178,7 @@
     </flux:header>
 
     <flux:main class="flex-1 p-6 lg:p-8">
-        <flux:heading size="xl" level="1">Good afternoon, Olivia</flux:heading>
-
-        <flux:text class="mt-2 mb-6 text-base">Here's what's new today</flux:text>
-
-        <flux:separator variant="subtle" />
+        {{ $slot }}
     </flux:main>
 
     @fluxScripts

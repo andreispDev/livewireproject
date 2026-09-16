@@ -9,11 +9,12 @@ selection did not update Tailwind styles consistently.
 
 1. Flux adds a `.dark` class to the `<html>` element, but Tailwind CSS was
    still using its default dark-mode behavior instead of the selector strategy.
-2. The dashboard Livewire view had its `@layout('layouts.app')` directive
-   commented out, so it did not load the shared layout containing the
+2. The dashboard Livewire view did not load the shared layout containing the
    appearance controls and Flux scripts.
 3. The post creation Livewire view also needed to use the shared application
    layout for consistent appearance behavior.
+4. The shared application layout did not output the Livewire component slot, so
+   the dashboard component was not visible.
 
 ## Changes made
 
@@ -34,23 +35,27 @@ selection did not update Tailwind styles consistently.
 - Preserved the existing Flux accent color customization for light and dark
   modes.
 
-### `resources/views/components/dashboard/⚡index.blade.php`
+### `resources/views/layouts/app.blade.php`
 
-- Enabled the shared layout by changing the commented layout directive to:
-
-    ```blade
-    @layout('layouts.app')
-    ```
-
-### `resources/views/pages/post/⚡create.blade.php`
-
-- Added:
+- Replaced the placeholder content with:
 
     ```blade
-    @layout('layouts.app')
+    {{ $slot }}
     ```
 
-    so the page uses the same Flux appearance handling as the dashboard.
+    This allows each full-page Livewire component to render inside the layout.
+
+### `resources/views/components/dashboard/⚡index.blade.php` and `resources/views/pages/post/⚡create.blade.php`
+
+- Added the Livewire layout attribute:
+
+    ```blade
+    use Livewire\Attributes\Layout;
+
+    new #[Layout('layouts.app')] class extends Component {
+    ```
+
+    This applies the shared layout without creating an extra root element.
 
 ## Existing layout behavior
 
